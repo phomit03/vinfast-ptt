@@ -1,0 +1,489 @@
+ /* Product Gallery Styles */
+.product-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.thumbnail-wrapper {
+    position: relative;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.thumbnail-container {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 5px 0;
+}
+
+.thumbnail-container::-webkit-scrollbar {
+    display: none;
+}
+
+.main-image {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    margin-bottom: 15px;
+}
+
+.main-image img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.5s ease;
+}
+
+.main-image:hover img {
+    transform: scale(1.05);
+}
+
+.thumbnail {
+    flex: 0 0 150px;
+    height: 80px;
+    border-radius: 5px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.thumbnail:hover {
+    border-color: #007bff;
+}
+
+.thumbnail.active {
+    border: 2px solid #007bff;
+}
+
+.thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Arrow buttons */
+.thumbnail-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.thumbnail-wrapper:hover .thumbnail-arrow {
+    opacity: 1;
+}
+
+.thumbnail-arrow-left {
+    left: 5px;
+}
+
+.thumbnail-arrow-right {
+    right: 5px;
+}
+
+.thumbnail-arrow i {
+    font-size: 18px;
+    color: #121212;
+}
+
+.color-option.active {
+    border: 2px solid #151515;
+    transform: scale(1.2);
+}
+
+/* Product Info Styles */
+.product-details-sidebar {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    height: 100%;
+}
+
+.product-title {
+    margin-bottom: 10px;
+    color: #333;
+    font-size: 1.8rem;
+}
+
+.product-subtitle {
+    color: #666;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+}
+
+.product-price {
+    margin: 20px 0;
+}
+
+.product-price .price {
+    font-weight: bold;
+    font-size: 1.8rem;
+    color: #dc3545;
+}
+
+.product-price .old-price {
+    color: #777;
+    text-decoration: line-through;
+    margin-left: 10px;
+    font-size: 1.2rem;
+}
+
+.color-options {
+    margin: 20px 0;
+}
+
+.color-option {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.color-option:hover, .color-option.active {
+    border-color: #333;
+}
+
+.product-actions {
+    margin-top: 25px;
+}
+
+.btn-contact {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-contact:hover {
+    background-color: #1055a3;
+    color: white;
+}
+
+.btn-test-drive {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.1rem;
+    background-color: transparent;
+    color: #007bff;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.btn-test-drive:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-pdf {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.1rem;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-pdf:hover {
+    background-color: #218838;
+    color: white;
+}
+
+/* Product Details Section */
+.list-unstyled {
+    margin-top: 5px;
+}
+
+.details-section {
+    margin-top: 50px;
+    padding: 30px 0;
+    border-top: 1px solid #eee;
+}
+
+.section-title {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 25px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.section-title:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 60px;
+    height: 3px;
+    background: #007bff;
+}
+
+.price-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.price-table th, .price-table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.price-table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+
+.price-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.price-table tr.highlight {
+    background-color: #e7f5ff;
+    font-weight: bold;
+}
+
+.mt-5 {
+    margin-top: 2rem !important;
+}
+
+.specs-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.specs-column {
+    flex: 1;
+    min-width: 300px;
+}
+
+.spec-item {
+    margin-bottom: 20px;
+}
+
+.spec-title {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.spec-value {
+    color: #666;
+}
+
+.promotion-item.highlight {
+    background-color: #e6ffe6;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
+.promotion-item.highlight i {
+    color: #28a745;
+}
+
+.top-tech {
+    margin-top: 20px;
+}
+
+.tech-badge {
+    display: inline-block;
+    background-color: #f0f8ff;
+    color: #0068b3;
+    padding: 4px 10px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    border: 1px solid #d0e3ff;
+}
+
+.pdf-download {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 30px;
+    text-align: center;
+    border: 1px dashed #ddd;
+}
+
+.intro-product-detail {
+    margin: 30px 0;
+}
+
+.modal {
+     display: none;
+     position: fixed;
+     z-index: 1;
+     left: 0;
+     top: 0;
+     width: 100%;
+     height: 100%;
+     background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 5px;
+    position: relative;
+}
+
+.modal-content h3 {
+    margin-bottom: 20px;
+}
+
+.close {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: black;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+.btn-submit {
+    float: right;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-submit:hover {
+    background-color: #0a68d3;
+}
+
+
+ /* CSS cho các nút model selector */
+ .model-selector {
+     text-align: center;
+     margin: 20px 0 50px 0;
+ }
+
+ .model-selector h5 {
+     margin-bottom: 15px;
+     font-size: 18px;
+     color: #333;
+     font-weight: 600;
+ }
+
+ .btn-group {
+     display: flex;
+     flex-wrap: wrap;
+     justify-content: center;
+     gap: 10px;
+ }
+
+ .model-btn {
+     padding: 10px 20px;
+     border: 2px solid #007bff !important; /* Màu xanh dương VinFast */
+     background-color: white;
+     color: #007bff;
+     font-weight: 600;
+     border-radius: 30px !important; /* Bo tròn góc */
+     text-transform: uppercase;
+     font-size: 14px;
+     transition: all 0.3s ease;
+     cursor: pointer;
+     min-width: 120px;
+     text-align: center;
+ }
+
+ .model-btn:hover {
+     background-color: #007bff;
+     color: white;
+     transform: translateY(-2px);
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+ }
+
+ .model-btn.active {
+     background-color: #007bff;
+     color: white;
+ }
+
+ /* Responsive cho mobile */
+ @media (max-width: 576px) {
+     .btn-group {
+         flex-direction: column;
+         align-items: center;
+     }
+
+     .model-btn {
+         width: 100%;
+         max-width: 320px;
+     }
+ }
+
+ /* Hiệu ứng khi click */
+ .model-btn:active {
+     transform: translateY(0);
+     box-shadow: none;
+ }
