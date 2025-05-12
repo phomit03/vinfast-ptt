@@ -5,9 +5,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const toastError = document.getElementById("toast-error");
 
     function formatDriveDate(formData, format = "dd/mm/yyyy") {
-        if (!formData.has("driveDate")) return;
+        if (!formData.has("date_drive_test")) return;
 
-        const rawDate = formData.get("driveDate");
+        const rawDate = formData.get("date_drive_test");
         if (!rawDate) return;
 
         const date = new Date(rawDate);
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 break;
         }
 
-        formData.set("driveDate", formatted);
+        formData.set("date_drive_test", formatted);
     }
 
     function handleSubmit(form) {
