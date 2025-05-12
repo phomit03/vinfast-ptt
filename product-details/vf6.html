@@ -7,6 +7,9 @@
           rel="stylesheet">
     <title>VinFast VF6 | Vinfast Phan Trọng Tuệ - Nghệ An</title>
 
+    <link type="image/x-icon" rel="shortcut icon"
+          href="../assets/images/favicon.png"/>
+
     <!-- Bootstrap core CSS -->
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -66,7 +69,8 @@
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
                     <a href="../index.html" class="logo">
-                        <h1>Vinfast</h1>
+                        <img src="../assets/images/vinfast-logo.png" class="logo-desktop" alt="VinFast Logo">
+                        <img src="../assets/images/vinfast-logo-mobile.png" class="logo-mobile" alt="VinFast Logo Mobile">
                     </a>
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
@@ -196,7 +200,7 @@
                     </div>
 
                     <div class="product-actions">
-                        <a href="https://zalo.me/0986.496.999" target="_blank">
+                        <a href="../contact.html" target="_blank">
                             <button class="btn btn-contact">
                                 <i class="bi bi-telephone-fill"></i> Liên hệ ngay
                             </button>
@@ -211,22 +215,93 @@
                         <div class="modal-content">
                             <span class="close" onclick="closeModal('testDriveForm')">&times;</span>
                             <h3>Đăng ký lái thử</h3>
-                            <form>
+                            <form id="drive-form" method="post" action="https://formspree.io/f/xanoneqj" autocomplete="off">
                                 <div class="form-group">
-                                    <label for="driveName">Họ và tên:</label>
-                                    <input type="text" id="driveName" required>
+                                    <label for="name">Họ và tên <span style="color: red">(*)</span></label>
+                                    <input type="text" id="name" name="name"
+                                           pattern="^[a-zA-ZÀ-ỹ\s]{2,50}$"
+                                           placeholder="Vui lòng nhập họ tên khách hàng..."
+                                           oninput="this.setCustomValidity('')"
+                                           oninvalid="
+                                             if (this.value !== '' && !this.validity.valid) {
+                                               this.setCustomValidity('Họ tên chỉ gồm chữ cái, độ dài từ 2 đến 50 ký tự!');
+                                             } else {
+                                               this.setCustomValidity('Khách hàng vui lòng nhập họ tên.');
+                                             }
+                                           "
+                                           autocomplete="on"
+                                           required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="drivePhone">Số điện thoại:</label>
-                                    <input type="tel" id="drivePhone" required>
+                                    <label for="phone">Số điện thoại <span style="color: red">(*)</span></label>
+                                    <input type="tel" id="phone" name="phone"
+                                           pattern="^(0|\+84)[0-9]{9}$"
+                                           placeholder="Vui lòng nhập SĐT khách hàng..."
+                                           autocomplete="on"
+                                           oninput="this.setCustomValidity('')"
+                                           oninvalid="
+                                             if (this.value !== '' && !this.validity.valid) {
+                                               this.setCustomValidity('Số điện thoại nhập không hợp lệ!');
+                                             } else {
+                                               this.setCustomValidity('Khách hàng vui lòng nhập số điện thoại.');
+                                             }
+                                           "
+                                           required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="driveDate">Ngày đăng ký:</label>
-                                    <input type="date" id="driveDate" required>
+                                    <label for="phone">Email <span style="color: red">(*)</span></label>
+                                    <input type="email" name="email" id="email"
+                                           pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$"
+                                           placeholder="Nhập email khách hàng..."
+                                           autocomplete="on"
+                                           oninvalid="
+                                             if (this.value !== '' && !this.validity.valid) {
+                                               this.setCustomValidity('Email nhập không hợp lệ!');
+                                             } else {
+                                               this.setCustomValidity('Khách hàng vui lòng nhập số điện thoại.');
+                                             }
+                                           "
+                                           oninput="this.setCustomValidity('')"
+                                           required>
                                 </div>
+                                <div class="form-group">
+                                    <label for="driveDate">Ngày đăng ký <span style="color: red">(*)</span></label>
+                                    <input type="date" id="driveDate" name="driveDate"
+                                           autocomplete="on"
+                                           oninput="this.setCustomValidity('')"
+                                           oninvalid="
+                                             if (this.value === '') {
+                                               this.setCustomValidity('Vui lòng chọn ngày đăng ký lái thử.');
+                                             }
+                                           "
+                                           required>
+                                </div>
+
+                                <!-- Honeypot -->
+                                <div style="display:none;">
+                                    <label>
+                                        <input type="text" name="_gotcha">
+                                    </label>
+                                </div>
+
+                                <input type="hidden" name="time_submit" id="time_submit">
+
+                                <input type="hidden" name="_subject" value="Khách Đăng Ký Lái Thử VF6!">
+
                                 <button type="submit" class="btn btn-submit">Đăng ký</button>
                             </form>
                         </div>
+                    </div>
+
+                    <!-- Alert -->
+                    <div id="toast-success" class="toast-success">
+                        🎉 Thông tin của bạn đã được gửi thành công!<br>
+                        Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất.
+                    </div>
+
+                    <div id="toast-error" class="toast-error">
+                        ❌ Gửi thông tin thất bại!<br>
+                        Vui lòng thử lại sau.
                     </div>
                 </div>
             </div>
@@ -512,6 +587,34 @@
 <script src="../assets/js/active-nav.js"></script>
 <script src="../assets/js/product-detail.js"></script>
 <script src="../assets/js/modal-toggle.js"></script>
+<script src="../assets/js/form-handle.js"></script>
+
+<script>
+    const driveDateInput = document.getElementById("driveDate");
+
+    const today = new Date();
+    const maxDate = new Date();
+
+    maxDate.setDate(today.getDate() + 30); // +30 ngày
+
+    // Format YYYY-MM-DD
+    const formatDate = (date) => date.toISOString().split("T")[0];
+
+    driveDateInput.setAttribute("min", formatDate(today));
+    driveDateInput.setAttribute("max", formatDate(maxDate));
+
+    driveDateInput.addEventListener("change", function () {
+        const selectedDate = new Date(this.value);
+        selectedDate.setHours(0, 0, 0, 0);
+        today.setHours(0, 0, 0, 0);
+        maxDate.setHours(0, 0, 0, 0);
+
+        if (selectedDate < today || selectedDate > maxDate) {
+            alert("Không được chọn ngày đăng ký ngoài khoảng từ hôm nay - 30 ngày tới.");
+            this.value = "";
+        }
+    });
+</script>
 <script src="../assets/js/data-detail/vf6.js"></script>
 
 </body>
