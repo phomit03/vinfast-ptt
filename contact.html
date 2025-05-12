@@ -18,19 +18,27 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
 
     <style>
-        .toast-success {
+        .toast-success,
+        .toast-error {
             position: fixed;
-            bottom: 30px; /* Hoặc top: 30px để ở trên */
+            bottom: 30px;
             right: 30px;
-            background-color: #28a745;
             color: white;
             padding: 15px 20px;
             border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
             font-size: 16px;
             display: none;
             z-index: 9999;
             animation: slideIn 0.5s forwards;
+        }
+
+        .toast-success {
+            background-color: #28a745;
+        }
+
+        .toast-error {
+            background-color: #dc3545;
         }
 
         @keyframes slideIn {
@@ -153,27 +161,27 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <form id="contact-form" method="post" action="https://formspree.io/f/xanoneqj">
+                <form id="contact-form" method="post" action="https://formspree.io/f/xanoneqj" autocomplete="off">
                     <div class="row">
                         <div class="col-lg-12">
                             <fieldset>
-                                <label for="name">Họ & tên KH</label>
+                                <label for="name">Họ & tên khách hàng <span style="color: red">(*)</span></label>
                                 <input type="text" name="name" id="name" placeholder="Nhập họ tên khách hàng..."
                                        autocomplete="on" required>
                             </fieldset>
                         </div>
                         <div class="col-lg-12">
                             <fieldset>
-                                <label for="phone">Số điện thoại KH</label>
+                                <label for="phone">SĐT khách hàng <span style="color: red">(*)</span></label>
                                 <input type="tel" name="phone" id="phone" placeholder="Nhập số điện thoại khách hàng..."
                                        autocomplete="on" required>
                             </fieldset>
                         </div>
                         <div class="col-lg-12">
                             <fieldset>
-                                <label for="email">Email KH</label>
+                                <label for="email">Email khách hàng <span style="color: red">(*)</span></label>
                                 <input type="text" name="email" id="email" pattern="[^ @]*@[^ @]*"
-                                       placeholder="Nhập email khách hàng..." required="">
+                                       placeholder="Nhập email khách hàng..." required>
                             </fieldset>
                         </div>
                         <div class="col-lg-12">
@@ -189,14 +197,25 @@
                             </fieldset>
                         </div>
 
-                        <input type="hidden" name="_captcha" value="false">
-                        <input type="hidden" name="_subject" value="Khách liên hệ từ website VinFast!">
+                        <!-- Honeypot -->
+                        <div style="display:none;">
+                            <label>
+                                <input type="text" name="_gotcha">
+                            </label>
+                        </div>
+                        <input type="hidden" name="_subject" value="Khách Gửi Liên Hệ Từ Website!">
                     </div>
                 </form>
 
                 <!-- Alert -->
                 <div id="toast-success" class="toast-success">
-                    🎉 Gửi thông tin thành công!
+                    🎉 Thông tin của bạn đã được gửi thành công!<br>
+                    Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất.
+                </div>
+
+                <div id="toast-error" class="toast-error">
+                    ❌ Gửi thông tin thất bại!<br>
+                    Vui lòng thử lại sau.
                 </div>
 
             </div>
@@ -232,11 +251,11 @@
 
 <script>
     const form = document.getElementById("contact-form");
-    const toast = document.getElementById("toast-success");
+    const toastSuccess = document.getElementById("toast-success");
+    const toastError = document.getElementById("toast-error");
 
     form.addEventListener("submit", function (e) {
         e.preventDefault();
-
         const formData = new FormData(form);
 
         fetch(form.action, {
@@ -249,25 +268,24 @@
             .then(response => {
                 if (response.ok) {
                     form.reset();
-                    showToast();
+                    showToast(toastSuccess);
                 } else {
-                    alert("Gửi thất bại. Vui lòng thử lại.");
+                    showToast(toastError);
                 }
             })
             .catch(error => {
                 console.error("Error:", error);
-                alert("Lỗi kết nối. Vui lòng thử lại sau.");
+                showToast(toastError);
             });
     });
 
-    function showToast() {
-        toast.style.display = "block";
+    function showToast(toastElement) {
+        toastElement.style.display = "block";
         setTimeout(() => {
-            toast.style.display = "none";
+            toastElement.style.display = "none";
         }, 5000);
     }
 </script>
-
 
 </body>
 </html>
